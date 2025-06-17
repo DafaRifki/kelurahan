@@ -9,7 +9,7 @@ import Login from './components/Login';
 
 function Beranda() {
   return (
-    <div className='pt-18'>
+    <div className='pt-15'>
       <Hero />
       <MainContent />
       <Berita />

@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 const MainContent = () => {
   // Daftar gambar slideshow
   const images = [
-    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.4&auto=format&fit=crop&w=1600&q=80',
-    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-4.0.4&auto=format&fit=crop&w=1600&q=80',
-    'https://images.unsplash.com/photo-1494526585095-c4185f1d6e65?ixlib=rb-4.0.4&auto=format&fit=crop&w=1600&q=80',
+    'https://www.liputan12.id/media/images/2025/01/116776216f6b283.jpeg?location=1&width=&height=&quality=90&fit=1',
+    'https://scontent.fcgk43-1.fna.fbcdn.net/v/t1.6435-9/65465572_2314522895454490_32412988606513152_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=y5sk9VotPJ4Q7kNvwHBGH-v&_nc_oc=Adn2canoENVTBWe3bCo-V25bHsb8mANzSId7vmL0s5n3T1Xc_Mss5EHJ4nMkUDKVHrA&_nc_zt=23&_nc_ht=scontent.fcgk43-1.fna&_nc_gid=p0F01nwpSTww118bXJzeQw&oh=00_AfMpamBXcjaoz5PeVhahZB8x5RPC8wZJNQXvBGUxJrcXcg&oe=6878EF9D',
+    'https://asset-2.tstatic.net/bogor/foto/bank/images/curug-seribu.jpg',
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -19,13 +19,13 @@ const MainContent = () => {
   }, []);
 
   return (
-    <section className="py-12 bg-white" id="profil">
+    <section className="pt-19 py-12 bg-white" id="profil">
       <div className="container mx-auto px-4">
-        <h3 className="text-3xl font-semibold mb-8 text-center text-gray-800">Profil Kelurahan Melati</h3>
+        <h3 className="text-3xl font-semibold mb-8 text-center text-gray-800">Profil Kelurahan Gunung Sari</h3>
         <div className="grid md:grid-cols-2 gap-8">
           {/* Konten teks */}
           <div>
-            <h4 className="text-xl font-semibold mb-4">Tentang Kelurahan</h4>
+            <h4 className="text-xl font-semibold mb-3 text-black">Tentang Kelurahan</h4>
             <p className="mb-4 text-gray-700">
               Kelurahan Melati terletak di pusat kota, memiliki sejarah panjang dan masyarakat yang ramah. Kami berkomitmen untuk meningkatkan kesejahteraan warga dan menyediakan layanan terbaik.
             </p>

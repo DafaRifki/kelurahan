@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header className="fixed top-0 w-full z-50 bg-green-500 p-4 shadow-lg">
+    <header className="fixed top-0 w-full z-50 bg-green-500 p-3 shadow-lg">
       <div className="container mx-auto flex justify-between items-center text-white">
         <div className="flex items-center space-x-2">
-          <div className="w-10 h-10 bg-white text-blue-700 font-bold flex items-center justify-center rounded-full">
-            K
-          </div>
-          <h1 className="text-xl font-bold">Kelurahan Melati</h1>
-        </div>
+  <img
+    src="https://i0.wp.com/barayanews.co.id/wp-content/uploads/2021/12/1-1.jpg?w=750&ssl=1" // Ganti dengan URL gambar yang kamu inginkan
+    alt="Logo Kelurahan Gunung Sari"
+    className="w-10 h-10 object-cover rounded-full"
+  />
+  <h1 className="text-xl font-bold">Kelurahan Gunung Sari</h1>
+</div>
 
         <nav className="flex items-center space-x-4">
           <ul className="flex space-x-6 font-semibold">
