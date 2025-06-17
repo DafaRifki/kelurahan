@@ -5,10 +5,10 @@ const Login = () => {
     <div 
     className="min-h-screen w-full bg-cover bg-no-repeat"
     style={{backgroundImage: "url('/img/bg.jpg')"}}>
-      <div className='container mx-auto px-4 py-16 flex items-center justify-center relative'>
+      <div className='container mx-auto px-4 pt-35 py-16 flex items-center justify-center relative'>
       
       {/* Form container */}
-      <div className="relative bg-white bg-opacity-90 p-8 rounded-lg shadow-lg max-w-sm w-full z-10">
+      <div className="relative bg-white bg-opacity-90 p-7 rounded-lg shadow-lg max-w-sm w-full z-10">
         <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Login</h2>
         <form className="flex flex-col space-y-4">
           <div>
