@@ -7,6 +7,9 @@ import Berita from "./pages/Berita";
 import Footer from "./pages/Footer";
 import Login from "./components/Login";
 import Dashboard from "./pages/admin/Dashboard";
+import Profil from "./pages/profil";
+import PariwisataSection from "./pages/PariwisataSection";
+
 
 function Beranda() {
   return (
@@ -16,6 +19,7 @@ function Beranda() {
         <Hero />
         <MainContent />
         <Berita />
+        <PariwisataSection />
         <Footer />
       </div>
     </>
@@ -43,6 +47,9 @@ function App() {
 
         {/* Halaman dashboard admin */}
         <Route path="/admin/dashboard" element={<Dashboard />} />
+
+        <Route path="/" element={<Hero />} />
+        <Route path="/profil" element={<Profil />} />
       </Routes>
     </Router>
   );
