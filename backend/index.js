@@ -6,6 +6,7 @@ import db from "./config/Database.js";
 import SequelizeStore from "connect-session-sequelize";
 import UserRoute from "./routes/UserRoute.js";
 import AuthRoute from "./routes/AuthRoute.js";
+import PariwisataRoute from "./routes/PariwisataRoute.js";
 dotenv.config();
 
 const app = express();
@@ -46,6 +47,8 @@ app.use(
 app.use(express.json());
 app.use(UserRoute);
 app.use(AuthRoute);
+app.use(PariwisataRoute);
+app.use("/images", express.static("public/images"));
 
 // membuat table session
 // store.sync();
