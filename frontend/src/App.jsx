@@ -1,48 +1,38 @@
-// App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./pages/Header";
-import Hero from "./pages/Hero";
-import MainContent from "./pages/MainContent";
-import Berita from "./pages/Berita";
-import Footer from "./pages/Footer";
+import Home from "./pages/Home";
+import Profil from "./pages/Profil";
 import Login from "./components/Login";
 import Dashboard from "./pages/admin/Dashboard";
-
-function Beranda() {
-  return (
-    <>
-      <Header />
-      <div className="pt-15">
-        <Hero />
-        <MainContent />
-        <Berita />
-        <Footer />
-      </div>
-    </>
-  );
-}
-
-function LoginPage() {
-  return (
-    <>
-      <Header />
-      <Login />
-    </>
-  );
-}
+import User from "./pages/admin/User";
+import NotFound from "./components/NotFound";
+import PariwisataSection from "./components/PariwisataSection";
+import MainContent from "./components/MainContent";
+import Berita from "./components/Berita";
+import UserLayout from "./components/UserLayout";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Halaman utama */}
-        <Route path="/" element={<Beranda />} />
-
-        {/* Halaman login */}
-        <Route path="/login" element={<LoginPage />} />
-
-        {/* Halaman dashboard admin */}
+        <Route path="/" element={<Home />} />
+        <Route path="/profil" element={<Profil />} />
+        <Route
+          path="/login"
+          element={
+            <UserLayout>
+              <Login />
+            </UserLayout>
+          }
+        />
+        {/* Halaman admin tanpa UserLayout */}
         <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/data-user" element={<User />} />
+        <Route path="/admin/data-pariwisata" element={<NotFound />} />
+        {/* Halaman lain (opsional, jika ingin layout user) */}
+        <Route path="/main" element={<MainContent />} />
+        <Route path="/berita" element={<Berita />} />
+        <Route path="/pariwisata" element={<PariwisataSection />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
