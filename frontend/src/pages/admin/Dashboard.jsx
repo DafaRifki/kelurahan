@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import AdminLayout from "../../components/AdminLayout";
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Ambil data user dari localStorage
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
+  const userData = localStorage.getItem("user");
+  const user = userData ? JSON.parse(userData) : null;
 
   const handleLogout = () => {
-    // Hapus data user dari localStorage
     localStorage.removeItem("user");
-    setUser(null);
-    // Redirect ke halaman utama
     window.location.href = "/";
   };
 
   return (
-    <div className="py-20 px-4">
-      <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
+    <AdminLayout>
+      <h2 className="text-2xl font-bold text-black mb-4">Dashboard</h2>
       {user && (
-        <div>
+        <div className="text-blue-700 text-md font-medium mb-4">
           <p>Welcome, {user.name || user.email}</p>
           <button
             onClick={handleLogout}
@@ -32,7 +23,7 @@ const Dashboard = () => {
           </button>
         </div>
       )}
-    </div>
+    </AdminLayout>
   );
 };
 
