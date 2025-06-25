@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Profil from "./pages/Profil";
 import Login from "./components/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import User from "./pages/admin/User";
@@ -9,6 +8,8 @@ import PariwisataSection from "./components/PariwisataSection";
 import MainContent from "./components/MainContent";
 import Berita from "./components/Berita";
 import UserLayout from "./components/UserLayout";
+import Register from './components/Register';
+import Profil from "./pages/profil";
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
         <Route path="/berita" element={<Berita />} />
         <Route path="/pariwisata" element={<PariwisataSection />} />
         <Route path="*" element={<NotFound />} />
+         {/* Route default */}
+        <Route path="/register" element={
+            <UserLayout>
+              <Register />
+            </UserLayout>} />
       </Routes>
     </Router>
   );

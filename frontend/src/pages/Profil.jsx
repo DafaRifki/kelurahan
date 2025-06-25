@@ -19,12 +19,12 @@ const Profil = () => {
             <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
               <div className="relative group">
                 <img
-                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.1&auto=format&fit=crop&w=1200&q=80"
+                  src="https://scontent.fcgk43-1.fna.fbcdn.net/v/t1.6435-9/65465572_2314522895454490_32412988606513152_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=y5sk9VotPJ4Q7kNvwHBGH-v&_nc_oc=Adn2canoENVTBWe3bCo-V25bHsb8mANzSId7vmL0s5n3T1Xc_Mss5EHJ4nMkUDKVHrA&_nc_zt=23&_nc_ht=scontent.fcgk43-1.fna&_nc_gid=p0F01nwpSTww118bXJzeQw&oh=00_AfMpamBXcjaoz5PeVhahZB8x5RPC8wZJNQXvBGUxJrcXcg&oe=6878EF9D"
                   alt="Profil Kelurahan Gunung Sari"
                   className="w-full rounded-3xl shadow-xl group-hover:scale-105 transition duration-500"
                 />
                 <div className="absolute bottom-4 right-4 bg-green-700/80 text-white px-4 py-2 rounded-full text-sm shadow-lg opacity-0 group-hover:opacity-100 transition">
-                  Pusat Kota & Alam Indah
+                  Kantor Desa Gunung Sari
                 </div>
               </div>
             </div>
@@ -38,21 +38,17 @@ const Profil = () => {
               <ul className="mb-6 space-y-3">
                 <li className="text-gray-700 text-lg leading-relaxed">
                   <span className="inline-block w-3 h-3 bg-green-400 rounded-full mr-3 align-middle"></span>
-                  Kelurahan Gunung Sari terletak di pusat kota, dikenal dengan
-                  kekayaan budaya dan keindahan alamnya. Wilayah ini memiliki
-                  sejarah panjang dan komunitas yang ramah. Kami berkomitmen
-                  untuk memberikan layanan terbaik kepada warga dan pengunjung.
+                 Desa Gunungsari merupakan salah satu desa yang terletak di Kecamatan Pamijahan Kabupaten Bogor Provinsi Jawa Barat. 
+                 Desa Gunungsari berjarak sekitar 45 km atau 90 menit dari Ibukota Kabupaten Bogor. Rute menuju Desa Gunungsari dapat dilalui dengan menggunakan angkutan umum perkotaan dan kendaraan pribadi. 
                 </li>
                 <li className="text-gray-700 text-lg leading-relaxed">
                   <span className="inline-block w-3 h-3 bg-green-400 rounded-full mr-3 align-middle"></span>
-                  Di sini, Anda dapat menemukan informasi lengkap mengenai
-                  layanan publik, acara komunitas, wisata, dan berbagai kegiatan
-                  lainnya yang memperkaya kehidupan masyarakat.
+                  Jumlah penduduk di Desa Gunungsari yaitu sebanyak 11.501 jiwa.  
+                  Pengembangan Desa Wisata Lembur Anyar dimulai pada Tahun 2022.
                 </li>
                 <li className="text-gray-700 text-lg leading-relaxed">
                   <span className="inline-block w-3 h-3 bg-green-400 rounded-full mr-3 align-middle"></span>
-                  Mari bergabung dan jadikan Kelurahan Gunung Sari tempat yang
-                  lebih baik untuk semua!
+                  Desa Gunungsari memiliki banyak ATTRACTION, mulai dari wisata alam (air terjun, kawah, hutan wisata, terasering pesawahan dan lain-lain), wisata budaya (kampung budaya Lembur anyar), serta wisata buatan yang sangat menarik (resort, kolam renang, dan lain-lain). 
                 </li>
               </ul>
               {/* Tombol Kembali */}
