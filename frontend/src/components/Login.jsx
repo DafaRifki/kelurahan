@@ -97,6 +97,16 @@ const Login = () => {
             Login
           </button>
         </form>
+        <div className="mt-4 text-center">
+          <p className="text-sm text-gray-600">
+            Belum punya akun?{' '}
+            <a href="/register"
+              className="text-blue-500 hover:underline font-semibold"
+            >
+              Daftar di sini
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -29,20 +29,18 @@ const MainContent = () => {
       className="pt-24 py-16 bg-gradient-to-br from-blue-50 via-white to-blue-100"
       id="profil">
       <div className="container mx-auto px-4">
-        <h3 className="text-4xl font-bold mb-10 text-center text-blue-800 drop-shadow-lg">
-          Profil <span className="text-blue-500">Kelurahan Gunung Sari</span>
+        <h3 className="text-4xl font-bold mb-10 text-center text-yellow-600 drop-shadow-lg">
+          Profil <span className="text-yellow-400">Kelurahan Gunung Sari</span>
         </h3>
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Konten teks */}
           <div>
-            <h4 className="text-2xl font-semibold mb-4 text-blue-700 flex items-center gap-2">
-              <span className="inline-block w-2 h-8 bg-blue-400 rounded-full mr-2"></span>
+            <h4 className="text-2xl font-semibold mb-4 text-green-700 flex items-center gap-2">
+              <span className="inline-block w-2 h-8 bg-yellow-400 rounded-full mr-2"></span>
               Tentang Kelurahan
             </h4>
             <p className="mb-4 text-gray-700 text-lg leading-relaxed">
-              Kelurahan Melati terletak di pusat kota, memiliki sejarah panjang
-              dan masyarakat yang ramah. Kami berkomitmen untuk meningkatkan
-              kesejahteraan warga dan menyediakan layanan terbaik.
+              Gunung Sari adalah sebuah desa yang terletak di Kecamatan Pamijahan, Kabupaten Bogor. Desa ini dikenal dengan keindahan alamnya yang asri dan suasana yang tenang, cocok buat yang ingin menikmati suasana pedesaan dan udara segar.
             </p>
             <ul className="mb-4 pl-5 list-disc text-gray-700 text-base">
               <li>Fasilitas umum lengkap</li>
@@ -50,11 +48,8 @@ const MainContent = () => {
               <li>Program pembangunan berkelanjutan</li>
             </ul>
             <div className="mt-6 flex gap-4">
-              <button className="bg-blue-600 text-white px-6 py-2 rounded-full font-bold shadow hover:bg-blue-700 transition">
+              <button className="bg-green-600 text-white px-6 py-2 rounded-full font-bold shadow hover:bg-green-700 transition">
                 Lihat Program
-              </button>
-              <button className="bg-white text-blue-700 border border-blue-600 px-6 py-2 rounded-full font-bold shadow hover:bg-blue-50 transition">
-                Kontak Kami
               </button>
             </div>
           </div>

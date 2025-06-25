@@ -2,19 +2,13 @@ import React from "react";
 
 const pariwisata = [
   {
-    icon: "https://img.icons8.com/ios/50/000000/beach.png",
-    title: "Pantai Indah",
-    description:
-      "Nikmati keindahan pantai pasir putih dan air laut jernih di sekitar kelurahan.",
-  },
-  {
     icon: "https://img.icons8.com/?size=100&id=914&format=png&color=000000",
     title: "Wisata Alam",
     description:
       "Jelajahi keindahan alam pegunungan dan hutan yang memikat hati pengunjung.",
   },
   {
-    icon: "https://img.icons8.com/ios/50/000000/culture.png",
+    icon: "https://t4.ftcdn.net/jpg/05/58/58/57/360_F_558585759_5gAotjEd5OmigBlYNlxwwyGci71nGZEZ.jpghttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR62R5rPr14m87yFuNFibf183VEaTBDgrkCtiygHW4Oh5HvMtnduwdyHX4Fylf1wuXsHpY&usqp=CAU",
     title: "Budaya Lokal",
     description: "Kenali kekayaan budaya dan tradisi masyarakat setempat.",
   },
@@ -32,7 +26,7 @@ const PariwisataSection = () => {
       className="py-12 bg-cover bg-center bg-fixed relative"
       style={{
         backgroundImage:
-          "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')",
+          "url('https://ilmugeografi.com/wp-content/uploads/2019/12/ee1d58e4-gunung-salak.jpg')",
       }}>
       {/* Overlay gradasi hijau transparan */}
       <div className="absolute inset-0 bg-gradient-to-br from-green-900/40 via-green-200/10 to-transparent pointer-events-none"></div>
@@ -41,7 +35,7 @@ const PariwisataSection = () => {
           <h2 className="text-4xl font-bold mb-8 text-center text-green-100 drop-shadow-lg tracking-wide">
             Pariwisata
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="x-auto max-w-7xl grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
             {pariwisata.map((item, index) => (
               <div
                 key={index}
