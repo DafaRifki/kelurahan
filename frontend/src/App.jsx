@@ -8,8 +8,10 @@ import PariwisataSection from "./components/PariwisataSection";
 import MainContent from "./components/MainContent";
 import Berita from "./components/Berita";
 import UserLayout from "./components/UserLayout";
-import Register from './components/Register';
+import Register from "./components/Register";
 import Profil from "./pages/profil";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Pariwisata from "./pages/admin/Pariwisata";
 
 function App() {
   return (
@@ -26,19 +28,38 @@ function App() {
           }
         />
         {/* Halaman admin tanpa UserLayout */}
-        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/admin/data-user" element={<User />} />
-        <Route path="/admin/data-pariwisata" element={<NotFound />} />
+        <Route path="/admin/data-pariwisata" element={<Pariwisata />} />
         {/* Halaman lain (opsional, jika ingin layout user) */}
         <Route path="/main" element={<MainContent />} />
         <Route path="/berita" element={<Berita />} />
         <Route path="/pariwisata" element={<PariwisataSection />} />
-        <Route path="*" element={<NotFound />} />
-         {/* Route default */}
-        <Route path="/register" element={
+        <Route path="/not-found" element={<NotFound />} />
+        {/* Route default */}
+        <Route
+          path="/register"
+          element={
             <UserLayout>
               <Register />
-            </UserLayout>} />
+            </UserLayout>
+          }
+        />
       </Routes>
     </Router>
   );

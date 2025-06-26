@@ -35,7 +35,7 @@ const PariwisataSection = () => {
           <h2 className="text-4xl font-bold mb-8 text-center text-green-100 drop-shadow-lg tracking-wide">
             Pariwisata
           </h2>
-          <div className="x-auto max-w-7xl grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+          <div className="mx-auto max-w-7xl grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
             {pariwisata.map((item, index) => (
               <div
                 key={index}

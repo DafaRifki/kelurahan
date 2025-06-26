@@ -2,21 +2,24 @@ import React from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
-const AdminLayout = ({ children }) => (
-  <div className="min-h-screen bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 flex">
-    {/* Sidebar di kiri */}
-    <Sidebar />
-    {/* Konten utama di kanan */}
-    <div className="flex flex-col flex-1">
-      {/* Navbar di atas konten utama */}
-      <Navbar />
-      <main className="flex-1 p-8 overflow-y-auto bg-white rounded-tl-3xl shadow-2xl m-4">
-        <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 rounded-2xl p-8 min-h-[80vh] shadow-inner">
-          {children}
-        </div>
-      </main>
+const AdminLayout = ({ children }) => {
+  // Hilangkan state dan logic dark mode
+  return (
+    <div className="min-h-screen flex bg-gray-50">
+      {/* Sidebar di kiri */}
+      <Sidebar />
+      {/* Konten utama di kanan */}
+      <div className="flex flex-col flex-1">
+        {/* Navbar di atas konten utama */}
+        <Navbar />
+        <main className="flex-1 p-8 overflow-y-auto">
+          <div className="rounded-2xl p-8 min-h-[80vh] shadow-md border bg-white border-gray-100">
+            {children}
+          </div>
+        </main>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default AdminLayout;

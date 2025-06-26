@@ -15,7 +15,7 @@ const Pariwisata = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lokasi: {
+    kategori: {
       type: DataTypes.STRING,
       allowNull: false,
     },
