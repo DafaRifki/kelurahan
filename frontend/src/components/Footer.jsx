@@ -12,7 +12,7 @@ const Footer = () => {
             Kelurahan Gunung Sari
           </h4>
           <p className="text-sm flex items-center justify-center md:justify-start gap-2">
-            <FaMapMarkerAlt className="inline-block text-green-300" /> 8MG8+CQG, Kp. Cipeundeuy RT 05/01, Gn. Sari, Kec. Pamijahan, Kabupaten Bogor, Jawa Barat 16810
+            <FaMapMarkerAlt className="inline-block text-green-300" /> 8MG8+CQG, Gn. Sari, Kec. Pamijahan, Kabupaten Bogor, Jawa Barat 16810
           </p>
           <p className="text-sm flex items-center justify-center md:justify-start gap-2 mt-1">
             <FaPhoneAlt className="inline-block text-green-300" /> (021)

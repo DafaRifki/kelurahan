@@ -27,6 +27,12 @@ const Profil = () => {
                   Kantor Desa Gunung Sari
                 </div>
               </div>
+                  <div className="mt-4 p-20 pt-5 bg-white rounded-3xl shadow-xl border-l-4 border-green-200">
+                    <h4 className="text-2xl font-semibold mb-1 text-green-700">Visi & Misi</h4>
+                    <p className="text-gray-700 text-base">
+                      Visi Desa Gunungsari, Pamijahan, Bogor adalah "Terwujudnya Desa Gunungsari Bersemi (Bersih, Religius, Sejahtera, Maju, dan Indah) Berlandaskan Tri Hita Karana". Misi desa ini mencakup peningkatan partisipasi masyarakat dalam pembangunan, peningkatan kualitas sumber daya manusia yang berakhlak mulia, dan peningkatan taraf ekonomi masyarakat desa
+                    </p>
+                  </div>
             </div>
 
             {/* Isi Profil */}
@@ -59,7 +65,56 @@ const Profil = () => {
               </button>
             </div>
           </div>
+          {/* Kolom Peta */}
+          <div className="flex flex-col lg:flex-row bg-whitw p-8">
+      {/* Peta */}
+      <div className="lg:w-1/2 lg:mr-5 mb-9 lg:mb-0">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31647.44263568843!2d106.59466311532753!3d-6.655346295244234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69e923c7c53757%3A0xdc995efbc1561e5c!2sGunung%20Sari%2C%20Pamijahan%2C%20Bogor%2C%20Jawa%20Barat!5e0!3m2!1sen!2sid!4v1386371282047!5m2!1sen!2sid"
+          width="100%"
+          height="400"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+          className=" shadow-xl"
+        ></iframe>
+      </div>
+
+      {/* Deskripsi */}
+      <div className="lg:w-1/2 bg-white text-black p-4 rounded-lg">
+        <h3 className="text-2xl font-bold mb-4">Batas Desa:</h3>
+        <div className="grid grid-cols-2 gap-4 text-lg">
+          <div>
+            <p className="font-semibold">Utara</p>
+            <p>Desa Gunung Picung</p>
+          </div>
+          <div>
+            <p className="font-semibold">Timur</p>
+            <p>Desa Gunung Bunder I</p>
+          </div>
+          <div>
+            <p className="font-semibold">Selatan</p>
+            <p>Kabupaten Sukabumi</p>
+          </div>
+          <div>
+            <p className="font-semibold">Barat</p>
+            <p>Desa Pasarean</p>
+          </div>
         </div>
+        <hr className="my-4" />
+        <div className="flex justify-between">
+          <span className="font-semibold">Luas Desa:</span>
+          <span>683 Hektar</span>
+        </div>
+        <hr className="my-4" />
+        <div className="flex justify-between">
+          <span className="font-semibold">Jumlah Penduduk:</span>
+          <span>11.501 Jiwa</span>
+        </div>
+      </div>
+    </div>
+         </div>
+
         <style>
           {`
           .blur-2xl {
@@ -68,6 +123,7 @@ const Profil = () => {
         `}
         </style>
       </section>
+      
     </UserLayout>
   );
 };
