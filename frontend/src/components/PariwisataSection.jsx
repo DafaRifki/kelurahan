@@ -8,7 +8,7 @@ const pariwisata = [
       "Jelajahi keindahan alam pegunungan dan hutan yang memikat hati pengunjung.",
   },
   {
-    icon: "https://t4.ftcdn.net/jpg/05/58/58/57/360_F_558585759_5gAotjEd5OmigBlYNlxwwyGci71nGZEZ.jpghttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR62R5rPr14m87yFuNFibf183VEaTBDgrkCtiygHW4Oh5HvMtnduwdyHX4Fylf1wuXsHpY&usqp=CAU",
+    icon: "https://cdn-icons-png.flaticon.com/512/4850/4850670.png",
     title: "Budaya Lokal",
     description: "Kenali kekayaan budaya dan tradisi masyarakat setempat.",
   },
@@ -23,10 +23,10 @@ const PariwisataSection = () => {
   return (
     <section
       id="pariwisata"
-      className="py-12 bg-cover bg-center bg-fixed relative"
+      className="py-20 pt-20 bg-cover bg-center bg-fixed relative"
       style={{
         backgroundImage:
-          "url('https://ilmugeografi.com/wp-content/uploads/2019/12/ee1d58e4-gunung-salak.jpg')",
+          "url('https://superlive.id/storage/superadventure/2020/07/09/03226179fe63.jpg')",
       }}>
       {/* Overlay gradasi hijau transparan */}
       <div className="absolute inset-0 bg-gradient-to-br from-green-900/40 via-green-200/10 to-transparent pointer-events-none"></div>
