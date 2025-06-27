@@ -1,19 +1,18 @@
 import Pariwisata from "../models/PariwisataModel.js";
 
-// Get all
+// GET all (dengan pagination)
 export const getPariwisata = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
-    const offset = (page - 1) * limit;
+    const skip = (page - 1) * limit;
 
-    const total = await Pariwisata.count();
+    const total = await Pariwisata.countDocuments();
+    const data = await Pariwisata.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
 
-    const data = await Pariwisata.findAll({
-      limit: limit,
-      offset: offset,
-      order: [["createdAt", "DESC"]],
-    });
     res.status(200).json({
       data,
       page,
@@ -26,10 +25,10 @@ export const getPariwisata = async (req, res) => {
   }
 };
 
-// Get by ID
+// GET by ID
 export const getPariwisataById = async (req, res) => {
   try {
-    const data = await Pariwisata.findByPk(req.params.id);
+    const data = await Pariwisata.findById(req.params.id);
     if (!data) return res.status(404).json({ msg: "Data tidak ditemukan" });
     res.json(data);
   } catch (err) {
@@ -37,38 +36,44 @@ export const getPariwisataById = async (req, res) => {
   }
 };
 
-// Create
+// CREATE
 export const createPariwisata = async (req, res) => {
   try {
     const { nama, kategori, deskripsi } = req.body;
     const gambar = req.file ? req.file.filename : null;
-    await Pariwisata.create({ nama, kategori, deskripsi, gambar });
+    const newData = new Pariwisata({ nama, kategori, deskripsi, gambar });
+    await newData.save();
     res.status(201).json({ msg: "Data pariwisata berhasil ditambahkan" });
   } catch (err) {
     res.status(400).json({ msg: err.message });
   }
 };
 
-// Update
+// UPDATE
 export const updatePariwisata = async (req, res) => {
   try {
     const { nama, kategori, deskripsi } = req.body;
-    const data = await Pariwisata.findByPk(req.params.id);
+    const data = await Pariwisata.findById(req.params.id);
     if (!data) return res.status(404).json({ msg: "Data tidak ditemukan" });
+
     const gambar = req.file ? req.file.filename : data.gambar;
-    await data.update({ nama, kategori, deskripsi, gambar });
+    data.nama = nama;
+    data.kategori = kategori;
+    data.deskripsi = deskripsi;
+    data.gambar = gambar;
+
+    await data.save();
     res.json({ msg: "Data pariwisata berhasil diupdate" });
   } catch (err) {
     res.status(400).json({ msg: err.message });
   }
 };
 
-// Delete
+// DELETE
 export const deletePariwisata = async (req, res) => {
   try {
-    const data = await Pariwisata.findByPk(req.params.id);
+    const data = await Pariwisata.findByIdAndDelete(req.params.id);
     if (!data) return res.status(404).json({ msg: "Data tidak ditemukan" });
-    await data.destroy();
     res.json({ msg: "Data pariwisata berhasil dihapus" });
   } catch (err) {
     res.status(400).json({ msg: err.message });

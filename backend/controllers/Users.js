@@ -3,26 +3,23 @@ import argon2 from "argon2";
 
 export const getUsers = async (req, res) => {
   try {
-    const response = await User.findAll({
-      attributes: ["uuid", "name", "email", "role"],
-    });
-    res.status(200).json(response);
-  } catch (error) {
-    res.status(500).json({ msg: error.message });
+    const users = await User.find({}, "uuid name email role"); // select fields
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
   }
 };
 
 export const getUserById = async (req, res) => {
   try {
-    const response = await User.findOne({
-      attributes: ["uuid", "name", "email", "role"],
-      where: {
-        uuid: req.params.id,
-      },
-    });
-    res.status(200).json(response);
-  } catch (error) {
-    res.status(500).json({ msg: error.message });
+    const user = await User.findOne(
+      { uuid: req.params.id },
+      "uuid name email role"
+    );
+    if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
   }
 };
 
@@ -32,73 +29,51 @@ export const createUser = async (req, res) => {
     return res
       .status(400)
       .json({ msg: "Password dan Confirm Password tidak cocok" });
-  const hashPassword = await argon2.hash(password);
+
   try {
-    await User.create({
-      name: name,
-      email: email,
-      password: hashPassword,
-      role: role,
-    });
+    const hashPassword = await argon2.hash(password);
+    const user = new User({ name, email, password: hashPassword, role });
+    await user.save();
     res.status(201).json({ msg: "Register Berhasil" });
-  } catch (error) {
-    res.status(400).json({ msg: error.message });
+  } catch (err) {
+    res.status(400).json({ msg: err.message });
   }
 };
 
 export const updateUser = async (req, res) => {
-  const user = await User.findOne({
-    where: {
-      uuid: req.params.id,
-    },
-  });
-  if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
-  const { name, email, password, confPassword, role } = req.body;
-  let hashPassword;
-  if (password === "" || password === null) {
-    hashPassword = user.password;
-  } else {
-    hashPassword = await argon2.hash(password);
-  }
-  if (password !== confPassword)
-    return res
-      .status(400)
-      .json({ msg: "Password dan Confirm Password tidak cocok" });
   try {
-    await User.update(
-      {
-        name: name,
-        email: email,
-        password: hashPassword,
-        role: role,
-      },
-      {
-        where: {
-          id: user.id,
-        },
-      }
-    );
+    const user = await User.findOne({ uuid: req.params.id });
+    if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
+
+    const { name, email, password, confPassword, role } = req.body;
+    let hashPassword = user.password;
+
+    if (password && password !== "") {
+      if (password !== confPassword)
+        return res
+          .status(400)
+          .json({ msg: "Password dan Confirm Password tidak cocok" });
+      hashPassword = await argon2.hash(password);
+    }
+
+    user.name = name;
+    user.email = email;
+    user.password = hashPassword;
+    user.role = role;
+
+    await user.save();
     res.status(200).json({ msg: "User Updated" });
-  } catch (error) {
-    res.status(400).json({ msg: error.message });
+  } catch (err) {
+    res.status(400).json({ msg: err.message });
   }
 };
 
 export const deleteUser = async (req, res) => {
-  const user = await User.findOne({
-    where: {
-      uuid: req.params.id,
-    },
-  });
-  if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
   try {
-    await User.destroy({
-      where: {
-        id: user.id,
-      },
-    });
+    const user = await User.findOneAndDelete({ uuid: req.params.id });
+    if (!user) return res.status(404).json({ msg: "User tidak ditemukan" });
     res.status(200).json({ msg: "User Deleted" });
-  } catch (error) {
-    res.status(400).json({ msg: error.message });
+  } catch (err) {
+    res.status(400).json({ msg: err.message });
   }
 };

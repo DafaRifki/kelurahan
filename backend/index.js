@@ -2,34 +2,29 @@ import express from "express";
 import cors from "cors";
 import session from "express-session";
 import dotenv from "dotenv";
-import db from "./config/Database.js";
-import SequelizeStore from "connect-session-sequelize";
+import mongoose from "mongoose";
 import UserRoute from "./routes/UserRoute.js";
 import AuthRoute from "./routes/AuthRoute.js";
 import PariwisataRoute from "./routes/PariwisataRoute.js";
-dotenv.config();
 
+dotenv.config();
 const app = express();
 
-// menyimpan data terakhir user yang login
-const sessionStore = SequelizeStore(session.Store);
-
-const store = new sessionStore({
-  db: db,
+// Koneksi MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+mongoose.connection.once("open", () => {
+  console.log("MongoDB Connected");
 });
 
-// untuk membuat table sesuai dari model
-// (async () => {
-//   await db.sync();
-// })();
-
-// session
+// session (MemoryStore default)
 app.use(
   session({
     secret: process.env.SESS_SECRET,
     resave: false,
     saveUninitialized: true,
-    store: store,
     cookie: {
       secure: "auto",
     },
@@ -50,8 +45,11 @@ app.use(AuthRoute);
 app.use(PariwisataRoute);
 app.use("/images", express.static("public/images"));
 
-// membuat table session
-// store.sync();
+// Middleware untuk logging session
+// app.use((req, res, next) => {
+//   console.log("Session:", req.session);
+//   next();
+// });
 
 app.listen(process.env.APP_PORT, () => {
   console.log("Server up and running...");

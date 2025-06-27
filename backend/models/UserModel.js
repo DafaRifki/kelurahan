@@ -1,53 +1,38 @@
-import { Sequelize } from "sequelize";
-import db from "../config/Database.js";
+import mongoose from "mongoose";
+import { v4 as uuidv4 } from "uuid";
 
-const { DataTypes } = Sequelize;
-
-const Users = db.define(
-  "users",
+const UserSchema = new mongoose.Schema(
   {
     uuid: {
-      type: DataTypes.STRING,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      type: String,
+      default: uuidv4,
+      required: true,
     },
     name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        len: [3, 100],
-      },
+      type: String,
+      required: true,
+      minlength: 3,
+      maxlength: 100,
     },
     email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        isEmail: true,
-      },
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+\@.+\..+/, "Email tidak valid"],
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      type: String,
+      required: true,
     },
     role: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
+      type: String,
+      required: true,
     },
   },
   {
-    freezeTableName: true,
+    timestamps: true, // createdAt, updatedAt
   }
 );
 
-export default Users;
+const User = mongoose.model("User", UserSchema);
+export default User;

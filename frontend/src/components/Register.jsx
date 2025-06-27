@@ -13,14 +13,26 @@ function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (password !== confPassword) {
+      setMsg("Password dan konfirmasi tidak cocok.");
+      return;
+    }
+
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/register`, {
-        name,
-        email,
-        password,
-        confPassword,
-        role: "user",
-      });
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/users`,
+        {
+          name,
+          email,
+          password,
+          confPassword,
+          role: "user",
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
       setMsg("Register berhasil, silakan login.");
       setTimeout(() => navigate("/login"), 1200);
     } catch (error) {
@@ -37,7 +49,6 @@ function Register() {
       className="min-h-screen w-full bg-cover bg-no-repeat flex items-center justify-center"
       style={{ backgroundImage: "url('/img/bg.jpg')" }}>
       <div className="relative bg-white/90 p-8 rounded-3xl shadow-2xl max-w-sm w-full z-10 border-t-8 border-blue-400">
-        {/* Ornamen lingkaran kecil */}
         <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-blue-100 border-4 border-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg -mt-8">
           <FaUser className="text-blue-500 text-3xl" />
         </div>
@@ -53,11 +64,8 @@ function Register() {
           </div>
         )}
         <form className="flex flex-col space-y-4" onSubmit={handleRegister}>
-          {/* Nama */}
           <div>
-            <label
-              className="block mb-1 text-gray-700 font-semibold"
-              htmlFor="name">
+            <label className="block mb-1 text-gray-700 font-semibold">
               Nama
             </label>
             <div className="relative">
@@ -65,7 +73,6 @@ function Register() {
                 <FaUser />
               </span>
               <input
-                id="name"
                 type="text"
                 placeholder="Masukkan nama lengkap"
                 className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -75,11 +82,8 @@ function Register() {
               />
             </div>
           </div>
-          {/* Email */}
           <div>
-            <label
-              className="block mb-1 text-gray-700 font-semibold"
-              htmlFor="email">
+            <label className="block mb-1 text-gray-700 font-semibold">
               Email
             </label>
             <div className="relative">
@@ -87,7 +91,6 @@ function Register() {
                 <FaEnvelope />
               </span>
               <input
-                id="email"
                 type="email"
                 placeholder="Masukkan email"
                 className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -97,11 +100,8 @@ function Register() {
               />
             </div>
           </div>
-          {/* Password */}
           <div>
-            <label
-              className="block mb-1 text-gray-700 font-semibold"
-              htmlFor="password">
+            <label className="block mb-1 text-gray-700 font-semibold">
               Password
             </label>
             <div className="relative">
@@ -109,7 +109,6 @@ function Register() {
                 <FaLock />
               </span>
               <input
-                id="password"
                 type="password"
                 placeholder="Masukkan password"
                 className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -119,11 +118,8 @@ function Register() {
               />
             </div>
           </div>
-          {/* Konfirmasi Password */}
           <div>
-            <label
-              className="block mb-1 text-gray-700 font-semibold"
-              htmlFor="confPassword">
+            <label className="block mb-1 text-gray-700 font-semibold">
               Konfirmasi Password
             </label>
             <div className="relative">
@@ -131,7 +127,6 @@ function Register() {
                 <FaLock />
               </span>
               <input
-                id="confPassword"
                 type="password"
                 placeholder="Konfirmasi password"
                 className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -161,4 +156,5 @@ function Register() {
     </div>
   );
 }
+
 export default Register;

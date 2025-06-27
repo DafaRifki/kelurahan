@@ -1,162 +1,142 @@
 import React, { useState, useEffect } from "react";
 
-const EditUserModal = ({ open, user, onClose, onSave }) => {
+const EditPariwisataModal = ({ open, onClose, onSubmit, loading, data }) => {
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    role: "",
-    password: "",
-    confPassword: "",
+    nama: "",
+    kategori: "",
+    deskripsi: "",
+    gambar: null,
+    gambarPreview: "",
   });
 
   useEffect(() => {
-    if (user) {
+    if (data) {
       setForm({
-        name: user.name || "",
-        email: user.email || "",
-        role: user.role || "",
-        password: "",
-        confPassword: "",
+        nama: data.nama || "",
+        kategori: data.kategori || "",
+        deskripsi: data.deskripsi || "",
+        gambar: null,
+        gambarPreview: data.gambar
+          ? `${import.meta.env.VITE_API_URL}/images/${data.gambar}`
+          : "",
       });
     }
-  }, [user, open]);
-
-  if (!open) return null;
+  }, [data, open]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value, files } = e.target;
+    if (name === "gambar") {
+      setForm({
+        ...form,
+        gambar: files[0],
+        gambarPreview: files[0]
+          ? URL.createObjectURL(files[0])
+          : form.gambarPreview,
+      });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
-
-  // Validasi: nama, email, role wajib. Password & confPassword opsional (jika salah satu diisi, keduanya wajib dan harus sama)
-  const isFormValid =
-    form.name &&
-    form.email &&
-    form.role &&
-    ((form.password === "" && form.confPassword === "") ||
-      (form.password &&
-        form.confPassword &&
-        form.password === form.confPassword));
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ ...user, ...form });
+    onSubmit(form, () => {
+      setForm({
+        nama: "",
+        kategori: "",
+        deskripsi: "",
+        gambar: null,
+        gambarPreview: "",
+      });
+    });
   };
+
+  if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md border border-gray-100">
-        <h2 className="text-2xl font-bold mb-6 text-green-700 text-center tracking-tight">
-          Edit User
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-5">
+      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg border border-gray-100 relative">
+        <button
+          className="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl"
+          onClick={onClose}
+          aria-label="Tutup">
+          &times;
+        </button>
+        <h3 className="text-xl font-bold mb-6 text-green-700 text-center">
+          Edit Pariwisata
+        </h3>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block mb-1 font-semibold text-gray-700">
               Nama
             </label>
             <input
               type="text"
-              name="name"
-              value={form.name}
+              name="nama"
+              value={form.nama}
               onChange={handleChange}
-              className="input input-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800 placeholder-gray-400"
+              className="input input-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800"
               required
-              autoFocus
             />
           </div>
           <div>
             <label className="block mb-1 font-semibold text-gray-700">
-              Email
+              Kategori
             </label>
             <input
-              type="email"
-              name="email"
-              value={form.email}
+              type="text"
+              name="kategori"
+              value={form.kategori}
               onChange={handleChange}
-              className="input input-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800 placeholder-gray-400"
+              className="input input-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800"
               required
             />
           </div>
           <div>
             <label className="block mb-1 font-semibold text-gray-700">
-              Role
+              Deskripsi
             </label>
-            <select
-              name="role"
-              value={form.role}
+            <textarea
+              name="deskripsi"
+              value={form.deskripsi}
               onChange={handleChange}
-              className="input input-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800 placeholder-gray-400"
-              required>
-              <option value="">Pilih Role</option>
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
-            </select>
-            {form.role && (
-              <span
-                className={`badge badge-lg mt-2 px-4 py-2 font-semibold capitalize
-        ${
-          form.role === "admin"
-            ? "badge-success text-white"
-            : form.role === "user"
-            ? "badge-info text-white"
-            : "badge-ghost"
-        }
-      `}>
-                {form.role}
-              </span>
-            )}
+              className="textarea textarea-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800"
+              rows={3}
+              required
+            />
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block mb-1 font-semibold text-gray-700">
-                Password (opsional)
-              </label>
-              <input
-                type="password"
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                className="input input-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800 placeholder-gray-400"
-                placeholder="Kosongkan jika tidak ingin mengubah"
+          <div>
+            <label className="block mb-1 font-semibold text-gray-700">
+              Gambar
+            </label>
+            {form.gambarPreview && (
+              <img
+                src={form.gambarPreview}
+                alt="Preview"
+                className="mb-2 w-full h-40 object-cover rounded-lg border"
               />
-            </div>
-            <div>
-              <label className="block mb-1 font-semibold text-gray-700">
-                Konfirmasi Password
-              </label>
-              <input
-                type="password"
-                name="confPassword"
-                value={form.confPassword}
-                onChange={handleChange}
-                className="input input-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800 placeholder-gray-400"
-                placeholder="Kosongkan jika tidak ingin mengubah"
-              />
-            </div>
-          </div>
-          {form.password &&
-            form.confPassword &&
-            form.password !== form.confPassword && (
-              <div className="text-sm text-red-500 font-medium">
-                Password dan konfirmasi password tidak sama.
-              </div>
             )}
-          <div className="flex justify-end gap-3 mt-8">
+            <input
+              type="file"
+              name="gambar"
+              accept="image/*"
+              onChange={handleChange}
+              className="file-input file-input-bordered w-full"
+            />
+          </div>
+          <div className="flex justify-end gap-3 mt-6">
             <button
               type="button"
-              className="px-5 py-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold shadow transition"
-              onClick={onClose}>
+              className="btn btn-ghost"
+              onClick={onClose}
+              disabled={loading}>
               Batal
             </button>
             <button
               type="submit"
-              className={`px-5 py-2 rounded-full bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold shadow transition
-                ${
-                  !isFormValid
-                    ? "opacity-60 cursor-not-allowed"
-                    : "hover:from-green-600 hover:to-green-800"
-                }`}
-              disabled={!isFormValid}>
-              Simpan
+              className="btn btn-success text-white"
+              disabled={loading}>
+              {loading ? "Menyimpan..." : "Simpan"}
             </button>
           </div>
         </form>
@@ -164,5 +144,4 @@ const EditUserModal = ({ open, user, onClose, onSave }) => {
     </div>
   );
 };
-
-export default EditUserModal;
+export default EditPariwisataModal;

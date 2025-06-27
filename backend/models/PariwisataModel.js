@@ -1,39 +1,28 @@
-import { Sequelize } from "sequelize";
-import db from "../config/Database.js";
+import mongoose from "mongoose";
 
-const { DataTypes } = Sequelize;
-
-const Pariwisata = db.define(
-  "pariwisata",
+const PariwisataSchema = new mongoose.Schema(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     nama: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: String,
+      required: true,
     },
     kategori: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: String,
+      required: true,
     },
     deskripsi: {
-      type: DataTypes.TEXT,
-      allowNull: false,
+      type: String,
+      required: true,
     },
     gambar: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: String,
+      required: true,
     },
   },
   {
-    tableName: "pariwisata",
-    freezeTableName: true,
-    timestamps: true,
-    underscored: true,
+    timestamps: true, // otomatis buat createdAt & updatedAt
   }
 );
 
+const Pariwisata = mongoose.model("Pariwisata", PariwisataSchema);
 export default Pariwisata;

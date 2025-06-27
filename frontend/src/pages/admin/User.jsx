@@ -13,20 +13,20 @@ const columns = [
   {
     label: "Role",
     accessor: "role",
-    render: (v) => (
-      <span
-        className={`badge badge-sm px-3 py-2 font-semibold capitalize
-          ${
-            v === "admin"
-              ? "badge-success text-white"
-              : v === "user"
-              ? "badge-info text-white"
-              : "badge-ghost"
-          }
-        `}>
-        {v}
-      </span>
-    ),
+    render: (v) =>
+      v && (
+        <span
+          className={`badge badge-sm px-3 py-2 font-semibold capitalize
+            ${
+              v === "admin"
+                ? "badge-success text-white"
+                : v === "user"
+                ? "badge-info text-white"
+                : "badge-ghost"
+            }`}>
+          {v}
+        </span>
+      ),
   },
   {
     label: "Aksi",
@@ -50,6 +50,7 @@ const columns = [
 
 const User = () => {
   const [users, setUsers] = useState([]);
+  const [me, setMe] = useState(null);
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [editUser, setEditUser] = useState(null);
@@ -57,6 +58,7 @@ const User = () => {
 
   useEffect(() => {
     fetchUsers();
+    fetchMe();
   }, []);
 
   const fetchUsers = () => {
@@ -64,6 +66,15 @@ const User = () => {
       .get(`${import.meta.env.VITE_API_URL}/users`, { withCredentials: true })
       .then((res) => setUsers(res.data))
       .catch(() => setUsers([]));
+  };
+
+  const fetchMe = () => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/auth/me`, {
+        withCredentials: true,
+      })
+      .then((res) => setMe(res.data))
+      .catch(() => setMe(null));
   };
 
   const filteredUsers = users.filter((user) =>
@@ -78,6 +89,9 @@ const User = () => {
       .then(() => {
         fetchUsers();
         setShowAdd(false);
+      })
+      .catch((err) => {
+        alert("Gagal menambahkan user: " + err.response?.data?.msg);
       });
   };
 
@@ -89,9 +103,7 @@ const User = () => {
   const handleSaveEdit = (form) => {
     axios
       .patch(
-        `${import.meta.env.VITE_API_URL}/users/${
-          form.id || form.uuid || editUser.id
-        }`,
+        `${import.meta.env.VITE_API_URL}/users/${form.uuid || editUser.uuid}`,
         form,
         {
           withCredentials: true,
@@ -101,20 +113,25 @@ const User = () => {
         fetchUsers();
         setShowEdit(false);
         setEditUser(null);
+      })
+      .catch((err) => {
+        alert("Gagal mengubah user: " + err.response?.data?.msg);
       });
   };
 
   const handleDelete = (user) => {
     if (window.confirm(`Yakin ingin menghapus user ${user.name}?`)) {
       axios
-        .delete(`${import.meta.env.VITE_API_URL}/users/${user.id}`, {
+        .delete(`${import.meta.env.VITE_API_URL}/users/${user.uuid}`, {
           withCredentials: true,
         })
-        .then(() => fetchUsers());
+        .then(() => fetchUsers())
+        .catch((err) => {
+          alert("Gagal menghapus user: " + err.response?.data?.msg);
+        });
     }
   };
 
-  // Kolom dengan handler aksi
   const columnsWithAction = columns.map((col) =>
     col.accessor === "aksi"
       ? {
@@ -129,7 +146,7 @@ const User = () => {
     <AdminLayout>
       <div className="mb-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <h3 className="font-bold text-2xl text-gray-800 tracking-tight">
+          <h3 className="font-bold text-2xl text-green-700 tracking-tight">
             Halaman Data User
           </h3>
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto md:w-auto md:justify-end">
@@ -145,11 +162,14 @@ const User = () => {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <button
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-2 rounded-full shadow transition focus:outline-none focus:ring-2 focus:ring-green-300"
-              onClick={() => setShowAdd(true)}>
-              + Tambah User
-            </button>
+            {me?.role === "admin" ||
+              (true && (
+                <button
+                  className="bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-2 rounded-full shadow transition focus:outline-none focus:ring-2 focus:ring-green-300"
+                  onClick={() => setShowAdd(true)}>
+                  + Tambah User
+                </button>
+              ))}
           </div>
         </div>
       </div>
