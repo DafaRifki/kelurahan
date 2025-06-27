@@ -9,7 +9,7 @@ import MainContent from "./components/MainContent";
 import Berita from "./components/Berita";
 import UserLayout from "./components/UserLayout";
 import Register from "./components/Register";
-import Profil from "./pages/profil";
+import Profil from "./pages/Profil";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Pariwisata from "./pages/admin/Pariwisata";
 
