@@ -6,16 +6,19 @@ const pariwisata = [
     title: "Wisata Alam",
     description:
       "Jelajahi keindahan alam pegunungan dan hutan yang memikat hati pengunjung.",
+    link: "/wisata-alam", //link sesuai halaman tujuan
   },
   {
     icon: "https://cdn-icons-png.flaticon.com/512/4850/4850670.png",
     title: "Budaya Lokal",
     description: "Kenali kekayaan budaya dan tradisi masyarakat setempat.",
+    link: "/budaya-lokal", 
   },
   {
     icon: "https://img.icons8.com/ios/50/000000/food.png",
     title: "Kuliner",
     description: "Cicipi beragam makanan khas yang menggugah selera dan unik.",
+    link: "/kuliner",
   },
 ];
 
@@ -37,9 +40,12 @@ const PariwisataSection = () => {
           </h2>
           <div className="mx-auto max-w-7xl grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
             {pariwisata.map((item, index) => (
-              <div
+               <a
                 key={index}
-                className="relative bg-white/90 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 flex flex-col items-center group overflow-hidden">
+                href={item.link} // membuka di tab baru
+                rel="noopener noreferrer"
+                className="relative bg-white/90 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 flex flex-col items-center group overflow-hidden"
+              >
                 {/* Ornamen lingkaran blur hijau */}
                 <div className="absolute -top-6 -right-6 w-16 h-16 bg-green-200 rounded-full opacity-30 blur-2xl z-0"></div>
                 <div className="absolute -bottom-6 -left-6 w-10 h-10 bg-green-100 rounded-full opacity-40 blur z-0"></div>
@@ -56,7 +62,7 @@ const PariwisataSection = () => {
                 <p className="text-gray-700 text-center z-10">
                   {item.description}
                 </p>
-              </div>
+              </a>
             ))}
           </div>
         </div>

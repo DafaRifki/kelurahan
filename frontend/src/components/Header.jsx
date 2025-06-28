@@ -71,26 +71,27 @@ const Header = () => {
         <nav className="hidden md:flex items-center space-x-6">
           <ul className="flex space-x-6 font-semibold text-lg">
             <li>
-              <Link to="/" className="hover:text-yellow-200 transition">
+              <Link to="/" state={{scrollTarget: "beranda" }} className="hover:text-yellow-200 transition">
                 Beranda
               </Link>
             </li>
             <li>
-              <a href="#profil" className="hover:text-yellow-200 transition">
+              <Link to="/" state={{scrollTarget:"profil"}} className="hover:text-yellow-200 transition">
                 Profil
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#berita" className="hover:text-yellow-200 transition">
+              <Link to="/" state={{scrollTarget:"berita"}} className="hover:text-yellow-200 transition">
                 Berita
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#pariwisata"
+              <Link
+                to="/"
+                state={{scrollTarget:"pariwisata"}}
                 className="hover:text-yellow-200 transition">
                 Pariwisata
-              </a>
+              </Link>
             </li>
           </ul>
           {/* Login/Profile */}
@@ -143,28 +144,32 @@ const Header = () => {
           </button>
           <Link
             to="/"
+            state={{scrollTarget:"beranda"}}
             className="hover:text-yellow-200 transition"
             onClick={() => setNavOpen(false)}>
             Beranda
           </Link>
-          <a
-            href="#profil"
+          <Link
+            to="/"
+            state={{scrollTarget:"profil"}}
             className="hover:text-yellow-200 transition"
             onClick={() => setNavOpen(false)}>
             Profil
-          </a>
-          <a
-            href="#berita"
+          </Link>
+          <Link
+            to="/"
+            state={{scrollTarget:"berita"}}
             className="hover:text-yellow-200 transition"
             onClick={() => setNavOpen(false)}>
             Berita
-          </a>
-          <a
-            href="#pariwisata"
+          </Link>
+          <Link
+            to="/"
+            state={{scrollTarget:"pariwisata"}}
             className="hover:text-yellow-200 transition"
             onClick={() => setNavOpen(false)}>
             Pariwisata
-          </a>
+          </Link>
           {!user ? (
             <Link to="/login" onClick={() => setNavOpen(false)}>
               <button className="mt-4 w-full bg-white text-green-700 font-bold px-5 py-2 rounded-full shadow hover:bg-yellow-200 hover:text-green-900 transition">

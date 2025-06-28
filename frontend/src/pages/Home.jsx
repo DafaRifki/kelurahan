@@ -4,18 +4,35 @@ import MainContent from "../components/MainContent";
 import Berita from "../components/Berita";
 import PariwisataSection from "../components/PariwisataSection";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const Home = () => {
   const location = useLocation();
   const [showAlert, setShowAlert] = useState(false);
 
+  const beranda = useRef(null);
+  const profilRef = useRef(null);
+  const beritaRef = useRef(null);
+  const pariwisataRef = useRef(null);
+
   useEffect(() => {
-    // Tampilkan alert hanya jika diarahkan dari dashboard karena akses ditolak
-    if (location.state && location.state.accessDeniedDashboard) {
+    if (location.state?.accessDeniedDashboard) {
       setShowAlert(true);
       const timer = setTimeout(() => setShowAlert(false), 3000);
       return () => clearTimeout(timer);
+    }
+
+    // Scroll ke target bagian jika ada state scrollTarget
+    if (location.state?.scrollTarget) {
+      const refs = {
+        beranda: beranda,
+        profil: profilRef,
+        berita: beritaRef,
+        pariwisata: pariwisataRef,
+      };
+      refs[location.state.scrollTarget]?.current?.scrollIntoView({
+        behavior: "smooth",
+      });
     }
   }, [location.state]);
 
@@ -26,10 +43,18 @@ const Home = () => {
           Anda tidak memiliki akses ke dashboard!
         </div>
       )}
-      <Hero />
-      <MainContent />
-      <Berita />
-      <PariwisataSection />
+      <div ref={beranda}>
+        <Hero />
+      </div>
+      <div ref={profilRef}>
+        <MainContent />
+      </div>
+      <div ref={beritaRef}>
+        <Berita />
+      </div>
+      <div ref={pariwisataRef}>
+        <PariwisataSection />
+      </div>
       <style>
         {`
           .animate-fade-in {
@@ -45,4 +70,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home;

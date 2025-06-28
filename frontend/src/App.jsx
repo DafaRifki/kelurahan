@@ -12,6 +12,7 @@ import Register from "./components/Register";
 import Profil from "./pages/Profil";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Pariwisata from "./pages/admin/Pariwisata";
+import WisataAlam from "./pages/WisataAlam";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
             </UserLayout>
           }
         />
+         <Route path="/wisata-alam" element={<WisataAlam />} />
       </Routes>
     </Router>
   );
