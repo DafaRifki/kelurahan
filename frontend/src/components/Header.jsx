@@ -31,7 +31,6 @@ const Header = () => {
     navigate("/login");
   };
 
-  // Ambil inisial user
   const getInitial = (user) => {
     if (!user) return "";
     if (user.name) {
@@ -47,11 +46,10 @@ const Header = () => {
   return (
     <header className="fixed top-0 w-full z-50 bg-gradient-to-r from-green-700 via-green-500 to-green-400 p-3 shadow-xl">
       <div className="container mx-auto flex justify-between items-center text-white">
-        {/* Logo & Title */}
         <div className="flex items-center space-x-3">
           <img
             src="https://i0.wp.com/barayanews.co.id/wp-content/uploads/2021/12/1-1.jpg?w=750&ssl=1"
-            alt="Logo Kelurahan Gunung Sari"
+            alt="Logo"
             className="w-12 h-12 object-cover rounded-full border-4 border-white shadow-lg"
           />
           <h1 className="text-2xl font-extrabold tracking-wide drop-shadow-lg">
@@ -59,7 +57,6 @@ const Header = () => {
           </h1>
         </div>
 
-        {/* Hamburger for mobile */}
         <button
           className="md:hidden ml-4 p-2 rounded-full bg-white/20 hover:bg-white/30 transition"
           onClick={() => setNavOpen(!navOpen)}
@@ -67,37 +64,44 @@ const Header = () => {
           <FaBars size={22} />
         </button>
 
-        {/* Navigation Desktop */}
         <nav className="hidden md:flex items-center space-x-6">
           <ul className="flex space-x-6 font-semibold text-lg">
             <li>
-              <Link to="/" state={{scrollTarget: "beranda" }} className="hover:text-yellow-200 transition">
+              <Link
+                to="/"
+                state={{ scrollTarget: "beranda" }}
+                className="hover:text-yellow-200">
                 Beranda
               </Link>
             </li>
             <li>
-              <Link to="/" state={{scrollTarget:"profil"}} className="hover:text-yellow-200 transition">
+              <Link
+                to="/"
+                state={{ scrollTarget: "profil" }}
+                className="hover:text-yellow-200">
                 Profil
               </Link>
             </li>
             <li>
-              <Link to="/" state={{scrollTarget:"berita"}} className="hover:text-yellow-200 transition">
+              <Link
+                to="/"
+                state={{ scrollTarget: "berita" }}
+                className="hover:text-yellow-200">
                 Berita
               </Link>
             </li>
             <li>
               <Link
                 to="/"
-                state={{scrollTarget:"pariwisata"}}
-                className="hover:text-yellow-200 transition">
+                state={{ scrollTarget: "pariwisata" }}
+                className="hover:text-yellow-200">
                 Pariwisata
               </Link>
             </li>
           </ul>
-          {/* Login/Profile */}
           {!user ? (
             <Link to="/login">
-              <button className="ml-4 bg-white text-green-700 font-bold px-5 py-2 rounded-full shadow hover:bg-yellow-200 hover:text-green-900 transition">
+              <button className="ml-4 bg-white text-green-700 font-bold px-5 py-2 rounded-full shadow hover:bg-yellow-200">
                 Login
               </button>
             </Link>
@@ -105,7 +109,7 @@ const Header = () => {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="bg-white text-green-700 font-bold rounded-full w-12 h-12 flex items-center justify-center text-xl border-2 border-green-700 shadow-lg hover:bg-yellow-200 transition uppercase"
+                className="bg-white text-green-700 font-bold rounded-full w-12 h-12 flex items-center justify-center text-xl border-2 border-green-700 shadow-lg hover:bg-yellow-200 uppercase"
                 title={user.name || user.email}>
                 {getInitial(user) || <FaUserCircle />}
               </button>
@@ -127,9 +131,9 @@ const Header = () => {
         </nav>
       </div>
 
-      {/* Navigation Mobile */}
+      {/* Mobile Nav */}
       <div
-        className={`md:hidden fixed top-0 left-0 w-full h-full bg-black/40 z-40 transition ${
+        className={`md:hidden fixed top-0 left-0 w-full h-full bg-black/40 z-40 ${
           navOpen ? "block" : "hidden"
         }`}
         onClick={() => setNavOpen(false)}>
@@ -144,35 +148,35 @@ const Header = () => {
           </button>
           <Link
             to="/"
-            state={{scrollTarget:"beranda"}}
-            className="hover:text-yellow-200 transition"
-            onClick={() => setNavOpen(false)}>
+            state={{ scrollTarget: "beranda" }}
+            onClick={() => setNavOpen(false)}
+            className="hover:text-yellow-200">
             Beranda
           </Link>
           <Link
             to="/"
-            state={{scrollTarget:"profil"}}
-            className="hover:text-yellow-200 transition"
-            onClick={() => setNavOpen(false)}>
+            state={{ scrollTarget: "profil" }}
+            onClick={() => setNavOpen(false)}
+            className="hover:text-yellow-200">
             Profil
           </Link>
           <Link
             to="/"
-            state={{scrollTarget:"berita"}}
-            className="hover:text-yellow-200 transition"
-            onClick={() => setNavOpen(false)}>
+            state={{ scrollTarget: "berita" }}
+            onClick={() => setNavOpen(false)}
+            className="hover:text-yellow-200">
             Berita
           </Link>
           <Link
             to="/"
-            state={{scrollTarget:"pariwisata"}}
-            className="hover:text-yellow-200 transition"
-            onClick={() => setNavOpen(false)}>
+            state={{ scrollTarget: "pariwisata" }}
+            onClick={() => setNavOpen(false)}
+            className="hover:text-yellow-200">
             Pariwisata
           </Link>
           {!user ? (
             <Link to="/login" onClick={() => setNavOpen(false)}>
-              <button className="mt-4 w-full bg-white text-green-700 font-bold px-5 py-2 rounded-full shadow hover:bg-yellow-200 hover:text-green-900 transition">
+              <button className="mt-4 w-full bg-white text-green-700 font-bold px-5 py-2 rounded-full shadow hover:bg-yellow-200">
                 Login
               </button>
             </Link>
@@ -184,7 +188,7 @@ const Header = () => {
                   handleLogout();
                   setNavOpen(false);
                 }}
-                className="w-full bg-white text-green-700 font-bold px-5 py-2 rounded-full shadow hover:bg-yellow-200 hover:text-green-900 transition">
+                className="w-full bg-white text-green-700 font-bold px-5 py-2 rounded-full shadow hover:bg-yellow-200">
                 Logout
               </button>
             </div>
@@ -207,4 +211,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header;
