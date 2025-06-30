@@ -7,6 +7,8 @@ const initialForm = {
   gambar: null,
 };
 
+const kategoriOptions = ["wisata alam", "budaya", "kuliner", "perkebunan"];
+
 const AddPariwisataModal = ({ open, onClose, onSubmit, loading }) => {
   const [form, setForm] = useState(initialForm);
 
@@ -52,19 +54,29 @@ const AddPariwisataModal = ({ open, onClose, onSubmit, loading }) => {
               required
             />
           </div>
+
+          {/* Dropdown Kategori */}
           <div>
             <label className="block mb-1 font-semibold text-gray-700">
               Kategori
             </label>
-            <input
-              type="text"
+            <select
               name="kategori"
               value={form.kategori}
               onChange={handleChange}
-              className="input input-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800"
-              required
-            />
+              className="select select-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800"
+              required>
+              <option value="" disabled>
+                -- Pilih Kategori --
+              </option>
+              {kategoriOptions.map((kategori) => (
+                <option key={kategori} value={kategori}>
+                  {kategori.charAt(0).toUpperCase() + kategori.slice(1)}
+                </option>
+              ))}
+            </select>
           </div>
+
           <div>
             <label className="block mb-1 font-semibold text-gray-700">
               Deskripsi
@@ -78,6 +90,7 @@ const AddPariwisataModal = ({ open, onClose, onSubmit, loading }) => {
               required
             />
           </div>
+
           <div>
             <label className="block mb-1 font-semibold text-gray-700">
               Gambar
@@ -90,6 +103,7 @@ const AddPariwisataModal = ({ open, onClose, onSubmit, loading }) => {
               className="file-input file-input-bordered w-full"
             />
           </div>
+
           <div className="flex justify-end gap-3 mt-6">
             <button
               type="button"
