@@ -13,6 +13,7 @@ import Profil from "./pages/Profil";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Pariwisata from "./pages/admin/Pariwisata";
 import WisataAlam from "./pages/WisataAlam";
+import DetailBerita from "./pages/DetailBerita";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         {/* Halaman lain (opsional, jika ingin layout user) */}
         <Route path="/main" element={<MainContent />} />
         <Route path="/berita" element={<Berita />} />
+        <Route path="/berita/:slug" element={<DetailBerita />} />
         <Route path="/pariwisata" element={<PariwisataSection />} />
         <Route path="/not-found" element={<NotFound />} />
         {/* Route default */}
