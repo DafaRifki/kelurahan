@@ -14,6 +14,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Pariwisata from "./pages/admin/Pariwisata";
 import WisataAlam from "./pages/WisataAlam";
 import DetailBerita from "./pages/DetailBerita";
+import BudayaLokal from "./pages/BudayaLokal";
+import Kuliner from "./pages/Kuliner";
 
 function App() {
   return (
@@ -63,7 +65,9 @@ function App() {
             </UserLayout>
           }
         />
-         <Route path="/wisata-alam" element={<WisataAlam />} />
+        <Route path="/wisata-alam" element={<WisataAlam />} />
+        <Route path="/budaya-lokal" element={<BudayaLokal />} />
+        <Route path="/kuliner" element={<Kuliner />} />
       </Routes>
     </Router>
   );
