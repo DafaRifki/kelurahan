@@ -7,8 +7,12 @@ import NotFound from "./components/NotFound";
 import PariwisataSection from "./components/PariwisataSection";
 import MainContent from "./components/MainContent";
 import Berita from "./components/Berita";
+import DetailBerita from "./pages/DetailBerita";
 import BeritaAdmin from "./pages/admin/Berita";
 import UserLayout from "./components/UserLayout";
+import BudayaLokal from "./pages/BudayaLokal";
+import WisataAlam from "./pages/WisataAlam";
+import Kuliner from "./pages/Kuliner";
 import Register from "./components/Register";
 import Profil from "./pages/Profil";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -50,6 +54,7 @@ function App() {
         {/* Halaman lain (opsional, jika ingin layout user) */}
         <Route path="/main" element={<MainContent />} />
         <Route path="/berita" element={<Berita />} />
+        <Route path="/berita/:slug" element={<DetailBerita />} />
         <Route path="/pariwisata" element={<PariwisataSection />} />
         <Route path="/not-found" element={<NotFound />} />
         {/* Route default */}
@@ -61,7 +66,10 @@ function App() {
             </UserLayout>
           }
         />
-      <Route path="/admin/data-berita" element={<BeritaAdmin />} />
+        <Route path="/admin/data-berita" element={<BeritaAdmin />} />
+        <Route path="/wisata-alam" element={<WisataAlam />} />
+        <Route path="/kuliner" element={<Kuliner />} />
+        <Route path="/budaya-lokal" element={<BudayaLokal />} />
       </Routes>
     </Router>
   );
