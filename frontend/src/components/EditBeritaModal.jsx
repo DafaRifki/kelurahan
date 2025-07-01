@@ -1,81 +1,167 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-const EditBeritaModal = ({ open, onClose, onSave, berita }) => {
-  const [form, setForm] = useState(berita || {});
+const EditBeritaModal = ({ open, onClose, onSave, berita, loading }) => {
+  const [form, setForm] = useState({
+    judul: "",
+    slug: "",
+    tanggal: "",
+    isi: "",
+    gambar: null,
+    gambarPreview: "",
+  });
 
   useEffect(() => {
-    if (berita) setForm(berita);
-  }, [berita]);
+    if (berita) {
+      setForm({
+        judul: berita.judul || "",
+        slug: berita.slug || "",
+        tanggal: berita.tanggal ? berita.tanggal.split("T")[0] : "",
+        isi: berita.isi || "",
+        gambar: null,
+        gambarPreview: berita.gambar
+          ? `${import.meta.env.VITE_API_URL}/images/${berita.gambar}`
+          : "",
+      });
+    }
+  }, [berita, open]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value, files } = e.target;
+    if (name === "gambar") {
+      setForm({
+        ...form,
+        gambar: files[0],
+        gambarPreview: files[0]
+          ? URL.createObjectURL(files[0])
+          : form.gambarPreview,
+      });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    onSave(form);
+    onSave(form, () => {
+      setForm({
+        judul: "",
+        slug: "",
+        tanggal: "",
+        isi: "",
+        gambar: null,
+        gambarPreview: "",
+      });
+    });
   };
 
-  if (!open || !berita) return null;
+  if (!open) return null;
 
   return (
-    <div className="modal modal-open">
-      <div className="modal-box w-11/12 max-w-3xl">
-        <h3 className="font-bold text-lg mb-4">Edit Berita</h3>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg border border-gray-100 relative max-h-screen overflow-y-auto">
+        <button
+          className="sticky top-4 right-4 float-right text-gray-400 hover:text-red-500 text-2xl z-10 px-4"
+          onClick={onClose}
+          aria-label="Tutup">
+          &times;
+        </button>
+        <div className="p-8">
+          <h3 className="text-xl font-bold mb-6 text-green-700 text-center">
+            Edit Berita
+          </h3>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block mb-1 font-semibold text-gray-700">
+                Judul
+              </label>
+              <input
+                type="text"
+                name="judul"
+                value={form.judul}
+                onChange={handleChange}
+                className="input input-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800"
+                required
+              />
+            </div>
 
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <input
-            name="judul"
-            onChange={handleChange}
-            value={form.judul}
-            placeholder="Judul"
-            className="input input-bordered w-full"
-          />
+            <div>
+              <label className="block mb-1 font-semibold text-gray-700">
+                Slug
+              </label>
+              <input
+                type="text"
+                name="slug"
+                value={form.slug}
+                disabled
+                className="input input-bordered w-full bg-gray-100 text-gray-500"
+              />
+            </div>
 
-          <input
-            name="slug"
-            onChange={handleChange}
-            value={form.slug}
-            placeholder="Slug"
-            className="input input-bordered w-full"
-          />
+            <div>
+              <label className="block mb-1 font-semibold text-gray-700">
+                Tanggal
+              </label>
+              <input
+                type="date"
+                name="tanggal"
+                value={form.tanggal}
+                onChange={handleChange}
+                className="input input-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800"
+                required
+              />
+            </div>
 
-          <input
-            name="tanggal"
-            type="date"
-            onChange={handleChange}
-            value={form.tanggal?.split("T")[0]}
-            className="input input-bordered w-full"
-          />
+            <div>
+              <label className="block mb-1 font-semibold text-gray-700">
+                Isi Berita
+              </label>
+              <textarea
+                name="isi"
+                value={form.isi}
+                onChange={handleChange}
+                className="textarea textarea-bordered w-full bg-gray-50 focus:bg-white focus:border-green-500 text-gray-800"
+                rows={4}
+                required
+              />
+            </div>
 
-          <input
-            name="gambar"
-            onChange={handleChange}
-            value={form.gambar}
-            placeholder="URL Gambar"
-            className="input input-bordered w-full"
-          />
+            <div>
+              <label className="block mb-1 font-semibold text-gray-700">
+                Gambar
+              </label>
+              {form.gambarPreview && (
+                <img
+                  src={form.gambarPreview}
+                  alt="Preview"
+                  className="mb-2 w-full h-40 object-cover rounded-lg border"
+                />
+              )}
+              <input
+                type="file"
+                name="gambar"
+                accept="image/*"
+                onChange={handleChange}
+                className="file-input file-input-bordered w-full"
+              />
+            </div>
 
-          <textarea
-            name="deskripsi"
-            onChange={handleChange}
-            value={form.Deskripsi}
-            placeholder="Deskripsi"
-            className="textarea textarea-bordered w-full"
-          />
-
-          <div className="modal-action">
-            <button type="submit" className="btn btn-warning">
-              Update
-            </button>
-            <button type="button" className="btn" onClick={onClose}>
-              Batal
-            </button>
-          </div>
-        </form>
+            <div className="flex justify-end gap-3 mt-6">
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={onClose}
+                disabled={loading}>
+                Batal
+              </button>
+              <button
+                type="submit"
+                className="btn btn-success text-white"
+                disabled={loading}>
+                {loading ? "Menyimpan..." : "Simpan"}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
