@@ -46,7 +46,7 @@ function Register() {
     <div className="relative min-h-screen w-full overflow-hidden">
       {/* Background Video */}
       <video
-        className="fixed top-0 left-0 w-full h-full object-cover z-0"
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
         src="/img/bg.mp4"
         autoPlay
         loop
@@ -55,7 +55,7 @@ function Register() {
       />
 
       {/* Overlay Transparan */}
-      <div className="absolute inset-0 bg-transparant" />
+      <div className="absolute inset-0" />
 
       {/* Konten Form Register */}
       <div className="relative z-10 flex items-center justify-center min-h-screen">
