@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import UserRoute from "./routes/UserRoute.js";
 import AuthRoute from "./routes/AuthRoute.js";
+import BeritaRoute from "./routes/BeritaRoute.js";
 import PariwisataRoute from "./routes/PariwisataRoute.js";
 
 dotenv.config();
@@ -43,6 +44,7 @@ app.use(express.json());
 app.use(UserRoute);
 app.use(AuthRoute);
 app.use(PariwisataRoute);
+app.use(BeritaRoute);
 app.use("/images", express.static("public/images"));
 
 // Middleware untuk logging session

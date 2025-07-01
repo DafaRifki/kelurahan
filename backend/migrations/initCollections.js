@@ -33,6 +33,14 @@ const runMigration = async () => {
       console.log("ℹ️ Collection 'pariwisatas' sudah ada");
     }
 
+    // ✅ Tambahkan untuk koleksi berita
+    if (!collectionNames.includes("beritas")) {
+      await db.createCollection("beritas");
+      console.log("✅ Collection 'beritas' dibuat (kosong)");
+    } else {
+      console.log("ℹ️ Collection 'beritas' sudah ada");
+    }
+
     await mongoose.disconnect();
     console.log("🔌 Disconnected from MongoDB");
   } catch (error) {
