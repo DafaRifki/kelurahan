@@ -40,18 +40,16 @@ const MainContent = () => {
               Tentang Kelurahan
             </h4>
             <p className="mb-4 text-gray-700 text-lg leading-relaxed">
-              Gunung Sari adalah sebuah desa yang terletak di Kecamatan Pamijahan, Kabupaten Bogor. Desa ini dikenal dengan keindahan alamnya yang asri dan suasana yang tenang, cocok buat yang ingin menikmati suasana pedesaan dan udara segar.
+              Gunung Sari adalah sebuah desa yang terletak di Kecamatan
+              Pamijahan, Kabupaten Bogor. Desa ini dikenal dengan keindahan
+              alamnya yang asri dan suasana yang tenang, cocok buat yang ingin
+              menikmati suasana pedesaan dan udara segar.
             </p>
             <ul className="mb-4 pl-5 list-disc text-gray-700 text-base">
               <li>Fasilitas umum lengkap</li>
               <li>Pendidikan berkualitas</li>
               <li>Program pembangunan berkelanjutan</li>
             </ul>
-            <div className="mt-6 flex gap-4">
-              <button className="bg-green-600 text-white px-6 py-2 rounded-full font-bold shadow hover:bg-green-700 transition">
-                Lihat Program
-              </button>
-            </div>
           </div>
           {/* Gambar slideshow */}
           <div className="w-full h-72 relative overflow-hidden rounded-3xl shadow-xl group">
