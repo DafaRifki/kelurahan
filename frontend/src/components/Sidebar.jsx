@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { MdDashboard, MdMap, MdPeople } from "react-icons/md";
+import { MdDashboard, MdMap, MdPeople} from "react-icons/md";
+import { IoNewspaper } from "react-icons/io5"
 
 const menu = [
   {
@@ -17,6 +18,11 @@ const menu = [
     label: "User",
     to: "/admin/data-user",
     icon: <MdPeople />,
+  },
+  {
+    label: "Berita",
+    to: "/admin/data-berita",
+    icon: <IoNewspaper />,
   },
 ];
 
