@@ -41,11 +41,11 @@ app.use(
   })
 );
 app.use(express.json());
+app.use("/images", express.static("public/images"));
 app.use(UserRoute);
 app.use(AuthRoute);
 app.use(PariwisataRoute);
 app.use(BeritaRoute);
-app.use("/images", express.static("public/images"));
 
 // Middleware untuk logging session
 // app.use((req, res, next) => {
