@@ -11,48 +11,47 @@ import PariwisataRoute from "./routes/PariwisataRoute.js";
 dotenv.config();
 const app = express();
 
-// Koneksi MongoDB
+// MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 mongoose.connection.once("open", () => {
-  console.log("MongoDB Connected");
+  console.log("✅ MongoDB Connected");
 });
 
-// session (MemoryStore default)
+// Session
 app.use(
   session({
     secret: process.env.SESS_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
-      secure: "auto",
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
     },
   })
 );
 
-// middleware
+// CORS
 app.use(
   cors({
-    credentials: true,
     origin: process.env.FRONTEND_URL,
+    credentials: true,
     methods: ["GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS"],
   })
 );
+
 app.use(express.json());
 app.use("/images", express.static("public/images"));
+
+// Routes
 app.use(UserRoute);
 app.use(AuthRoute);
 app.use(PariwisataRoute);
 app.use(BeritaRoute);
 
-// Middleware untuk logging session
-// app.use((req, res, next) => {
-//   console.log("Session:", req.session);
-//   next();
-// });
-
 app.listen(process.env.APP_PORT, () => {
-  console.log("Server up and running...");
+  console.log("🚀 Server running on port", process.env.APP_PORT);
 });
