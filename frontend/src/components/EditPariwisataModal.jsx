@@ -40,17 +40,7 @@ const EditPariwisataModal = ({ open, onClose, onSubmit, loading, data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("nama", form.nama);
-    formData.append("kategori", form.kategori);
-    formData.append("deskripsi", form.deskripsi);
-
-    if (form.gambar) {
-      formData.append("gambar", form.gambar); // hanya kirim jika user ganti gambar
-    }
-
-    onSubmit(formData, () => {
+    onSubmit(form, () => {
       setForm({
         nama: "",
         kategori: "",

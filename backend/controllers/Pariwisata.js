@@ -53,23 +53,19 @@ export const createPariwisata = async (req, res) => {
 export const updatePariwisata = async (req, res) => {
   try {
     const { nama, kategori, deskripsi } = req.body;
-    const pariwisata = await Pariwisata.findById(req.params.id);
-    if (!pariwisata)
-      return res.status(404).json({ message: "Data tidak ditemukan" });
+    const data = await Pariwisata.findById(req.params.id);
+    if (!data) return res.status(404).json({ msg: "Data tidak ditemukan" });
 
-    pariwisata.nama = nama;
-    pariwisata.kategori = kategori;
-    pariwisata.deskripsi = deskripsi;
+    const gambar = req.file ? req.file.filename : data.gambar;
+    data.nama = nama;
+    data.kategori = kategori;
+    data.deskripsi = deskripsi;
+    data.gambar = gambar;
 
-    // Jika gambar baru dikirim
-    if (req.file) {
-      pariwisata.gambar = req.file.filename;
-    }
-
-    await pariwisata.save();
-    res.status(200).json({ message: "Data Pariwisata Berhasil diperbarui" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    await data.save();
+    res.json({ msg: "Data pariwisata berhasil diupdate" });
+  } catch (err) {
+    res.status(400).json({ msg: err.message });
   }
 };
 
